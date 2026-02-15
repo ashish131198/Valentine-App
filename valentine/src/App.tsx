@@ -135,8 +135,8 @@ export default function App() {
   }, [musicEnabled]);
 
   const handleNoHover = () => {
-    const randomTop = Math.random() * 60 + 20; 
-    const randomLeft = Math.random() * 60 + 20; 
+    const randomTop = Math.random() * 60 + 20;
+    const randomLeft = Math.random() * 60 + 20;
     setNoButtonPosition({ top: `${randomTop}%`, left: `${randomLeft}%` });
   };
 
@@ -178,7 +178,13 @@ export default function App() {
       setTimeout(() => {
         setFlippedPairIndexes([]);
         setIsPairChecking(false);
-        if (nextCards.every(card => card.matched)) setIsGameComplete(true);
+        if (nextCards.every(card => card.matched)) {
+          setTimeout(() => {
+            setIsGameComplete(true);
+            setActiveGame('menu');
+          }, 400);
+        }
+
       }, 300);
       return;
     }
@@ -206,9 +212,15 @@ export default function App() {
     if (playerWinner === 'X') {
       setTttBoard(playerBoard);
       setTttStatus('won');
-      setIsGameComplete(true);
+
+      setTimeout(() => {
+        setIsGameComplete(true);
+        setActiveGame('menu');
+      }, 500);
+
       return;
     }
+
 
     const emptyAfterPlayer = playerBoard
       .map((cell, cellIndex) => (cell ? null : cellIndex))
@@ -562,14 +574,22 @@ export default function App() {
               <span style={{ display: 'block', fontFamily: 'Dancing Script', fontSize: '1.8rem', color: '#ff6b9d', marginBottom: '0.5rem', fontWeight: '700' }}>Someone Special...</span>
               <span style={{ display: 'block', fontFamily: 'Great Vibes', fontSize: '2.5rem', background: 'linear-gradient(135deg, var(--accent-pink), #8e2de2)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>Will you be my Valentine?</span>
             </h1>
+            {/* <button */}
             <button
               className="btn-yes"
               onClick={() => {
                 setAccepted(true);
                 setIsGameComplete(false);
                 setActiveGame('menu');
+
+                // reset games properly
+                setPairCards([]);
+                setFlippedPairIndexes([]);
+                setTttBoard(Array(9).fill(null));
+                setTttStatus('playing');
               }}
             >
+
               <Sparkles size={22} /> Yes, I will!
             </button>
             <button className="btn-no" style={{ top: noButtonPosition.top, left: noButtonPosition.left }} onMouseEnter={handleNoHover} onClick={handleNoHover}>No 😢</button>
