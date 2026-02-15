@@ -6,6 +6,7 @@ import pic3 from './assets/c.jpeg';
 import pic4 from './assets/d.jpeg';
 import pic5 from './assets/e.jpeg';
 import pic6 from './assets/f.jpeg';
+import { POEMS_DATA } from './main';
 // Romantic Track URL
 const ROMANTIC_MUSIC_URL = "https://cdn.pixabay.com/download/audio/2026/02/07/audio_8bc4388f1e.mp3?filename=u_3zb5voh957-be-my-valentine-480893.mp3";
 
@@ -23,21 +24,21 @@ const PHOTO_ASSETS = [
 
 
 const PHOTO_CAPTIONS = [
-"The day my heart found its forever person ❤️.", 
-"Even sunsets get jealous of your glow 🌅✨.",
-"That smile… the reason behind my happiness😊💓." ,
-"Every moment with you becomes my favorite memory📸💕.", 
-"In the little moments with you, I find the biggest happiness🫶." ,
-"Your eyes hold the story of my forever👀❤️." 
+  "The day my heart found its forever person ❤️.",
+  "Even sunsets get jealous of your glow 🌅✨.",
+  "That smile… the reason behind my happiness😊💓.",
+  "Every moment with you becomes my favorite memory📸💕.",
+  "In the little moments with you, I find the biggest happiness🫶.",
+  "Your eyes hold the story of my forever👀❤️."
 ];
 
 // Marathi Question List for Gift 4
 const LOVE_QUESTIONS = [
-  { id: 'q1', text: "तुला नक्की कोणत्या क्षणी असं वाटलं की मीच तुझ्यासाठी 'तो' खास माणूस आहे? ❤️" },
+  { id: 'q1', text: "मी तुला प्रामाणिकपणे एक विचारू का? मी तुझ्यासाठी नक्की कोण आहे? 🥺" },
   { id: 'q2', text: "माझी अशी कोणती छोटी गोष्ट आहे जी तुझ्या चेहऱ्यावर नेहमी हसू आणते? 😊" },
   { id: 'q3', text: "जर आपण आत्ता जगात कुठेही उडून जाऊ शकलो, तर आपण कुठे जाऊ? ✈️" },
   { id: 'q4', text: "आपली अशी कोणती 'ड्रीम डेट' आहे जी अजून आपण पूर्ण केलेली नाही? 🌹" },
-  { id: 'q5', text: "मी तुला प्रामाणिकपणे एक विचारू का? मी तुझ्यासाठी नक्की कोण आहे? 🥺" },
+  { id: 'q5', text: "तुला नक्की कोणत्या क्षणी असं वाटलं की मीच तुझ्यासाठी 'तो' खास माणूस आहे? ❤️" },
   { id: 'q6', text: "तुला माझ्याबद्दल मैत्रीपेक्षा काहीतरी जास्त कधी वाटलं आहे का? ✨" },
   { id: 'q7', text: "तुला वाटतं का की भविष्यात आपण मित्र-मैत्रिणीपेक्षा जास्त काही असू शकतो? 💍" },
   { id: 'q8', text: "तू मला खूप आवडतेस... पण मला तुझ्या मनात माझ्याबद्दल नक्की काय भावना आहेत ते जाणून घ्यायचंय? 💓" },
@@ -92,6 +93,8 @@ export default function App() {
   const [selectedGift, setSelectedGift] = useState(null);
   const [letterStage, setLetterStage] = useState('sealed'); // sealed, opening, opened
   const [selectedImage, setSelectedImage] = useState(null);
+  const [selectedPoem, setSelectedPoem] = useState(null);
+
 
   // Gift 4 States
   const [journalIndex, setJournalIndex] = useState(0);
@@ -99,7 +102,7 @@ export default function App() {
   const [isJournalComplete, setIsJournalComplete] = useState(false);
   const [isQuestionAnimating, setIsQuestionAnimating] = useState(false);
 
-  const [musicEnabled, setMusicEnabled] = useState(false);
+  const [musicEnabled, setMusicEnabled] = useState(true);
   const [noButtonPosition, setNoButtonPosition] = useState({ top: '70%', left: '50%' });
   const [fallingHearts, setFallingHearts] = useState([]);
   const [rotation, setRotation] = useState(0);
@@ -132,10 +135,11 @@ export default function App() {
   }, [musicEnabled]);
 
   const handleNoHover = () => {
-    const randomTop = Math.random() * 60 + 20;
-    const randomLeft = Math.random() * 60 + 20;
+    const randomTop = Math.random() * 60 + 20; 
+    const randomLeft = Math.random() * 60 + 20; 
     setNoButtonPosition({ top: `${randomTop}%`, left: `${randomLeft}%` });
   };
+
 
   const startPairGame = () => {
     const shuffled = [...MATCH_PAIR_ICONS, ...MATCH_PAIR_ICONS]
@@ -279,7 +283,7 @@ export default function App() {
     let message = "💝 *Honest Answers from My Heart* 💖\n\n";
     LOVE_QUESTIONS.forEach((q) => {
       const answer = journalAnswers[q.id] || "No answer";
-      message += `❓ *${q.text}*\n✨ _${answer}_\n\n`;
+      message += `❓ * ${q.text} *\n✨ _${answer}_\n\n`;
     });
     message += "--- Sent with Love ---";
     const encodedMessage = encodeURIComponent(message);
@@ -405,7 +409,7 @@ export default function App() {
           position: fixed; padding: 0.6rem 1.5rem; background: rgba(255, 255, 255, 0.95); 
           border: 1px solid #e2e8f0; border-radius: 50px; color: var(--no-color-text); 
           font-weight: 600; z-index: 20; font-size: 0.9rem; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); 
-          transition: top 0.4s, left 0.4s;
+          transition: top 0.15s linear, left 0.15s linear, transform 0.1s;
         }
 
         .forever-line { 
@@ -727,10 +731,44 @@ export default function App() {
             ) : (
               <div style={{ background: '#fffcf5', padding: '2.5rem 1.2rem', borderRadius: '1.5rem', boxShadow: '0 15px 40px rgba(0,0,0,0.1)', width: '95%', maxWidth: '500px', margin: 'auto', borderTop: '15px solid var(--primary-pink)', fontFamily: 'Mrs Saint Delafield', fontSize: '3rem', color: 'var(--accent-pink)', lineHeight: '1.2', animation: 'slideIn 0.8s', position: 'relative' }}>
                 <button style={{ position: 'absolute', top: '1rem', right: '1rem', border: 'none', background: 'none', color: '#ccc', cursor: 'pointer' }} onClick={resetSelection}><X size={24} /></button>
-                My Dearest Love,
-                <p style={{ fontSize: '1.5rem', color: '#444', fontFamily: 'Parisienne', marginTop: '1rem' }}>From the moment I met you, I knew you were someone special. Your smile lights up my world.</p>
-                <div style={{ background: '#fff5f8', padding: '1.5rem', borderRadius: '1rem', color: '#c71585', margin: '1.5rem 0', fontStyle: 'italic', borderLeft: '5px solid var(--primary-pink)', fontFamily: 'sans-serif', textAlign: 'center', fontSize: '1.2rem' }}>तुझ्यासोबतचा प्रत्येक दिवस एक नवीन साहस वाटतो. तू मला एक चांगला माणूस बनण्यासाठी प्रेरणा देतेस. </div>
-                <div style={{ textAlign: 'right', color: 'var(--primary-pink)', fontSize: '2.5rem' }}>With all my love 💕</div>
+                My Dearest,
+
+                <p style={{ fontSize: '1.6rem', color: '#444', fontFamily: 'Parisienne', marginTop: '1rem' }}>
+                  I never told you this completely…
+                  but somewhere between our talks and those silent moments,
+                  my heart quietly chose you.
+                </p>
+
+                <div style={{
+                  background: '#fff5f8',
+                  padding: '1.6rem',
+                  borderRadius: '1rem',
+                  color: '#c71585',
+                  margin: '1.6rem 0',
+                  fontStyle: 'italic',
+                  borderLeft: '5px solid var(--primary-pink)',
+                  fontFamily: 'sans-serif',
+                  textAlign: 'center',
+                  fontSize: '1.25rem',
+                  lineHeight: '1.8'
+                }}>
+                  तू माझी आहेस की नाही…
+                  हे कदाचित नशिबालाच माहीत असेल.
+
+                  पण एक गोष्ट मात्र खरी आहे —
+                  मी जेव्हा हसतो, तेव्हा कारण तू असतेस…
+                  आणि जेव्हा शांत होतो, तेव्हाही विचार तुझाच असतो.
+                </div>
+
+                <p style={{ fontSize: '1.3rem', color: '#444', fontFamily: 'Parisienne' }}>
+                  I never forced love…
+                  because real love is felt, not demanded.
+                </p>
+
+                <div style={{ textAlign: 'right', color: 'var(--primary-pink)', fontSize: '2.4rem' }}>
+                  Always loving you… silently ❤️
+                </div>
+
               </div>
             )}
           </div>
@@ -792,6 +830,86 @@ export default function App() {
               </div>
             )}
           </div>
+
+        ) : selectedGift === 5 ? (
+          <div style={{ width: '100%', padding: '20px', textAlign: 'center' }}>
+
+            <h1 style={{
+              fontFamily: 'Great Vibes',
+              fontSize: '2.6rem',
+              color: '#ff1493',
+              marginBottom: '20px'
+            }}>
+              For You ❤️
+            </h1>
+
+            {!selectedPoem ? (
+              <div style={{ maxWidth: '600px', margin: 'auto', display: 'grid', gap: '15px' }}>
+
+                {POEMS_DATA.map((poem, i) => (
+                  <div key={i}
+                    onClick={() => setSelectedPoem(poem)}
+                    style={{
+                      padding: '18px',
+                      borderRadius: '20px',
+                      background: 'linear-gradient(135deg,#fff0f5,#ffffff)',
+                      boxShadow: '0 10px 25px rgba(0,0,0,0.08)',
+                      cursor: 'pointer',
+                      fontFamily: 'Kalam',
+                      fontWeight: 'bold',
+                      color: '#e91e63'
+                    }}>
+                    📜 {poem.title}
+                  </div>
+                ))}
+
+                <button onClick={resetSelection}
+                  style={{ background: 'none', border: 'none', color: '#888', marginTop: '10px', fontWeight: 'bold' }}>
+                  Back to Gifts 🎁
+                </button>
+
+              </div>
+            ) : (
+              <div style={{
+                maxWidth: '700px',
+                margin: 'auto',
+                background: '#fffafc',
+                padding: '30px',
+                borderRadius: '20px',
+                boxShadow: '0 20px 40px rgba(0,0,0,0.1)'
+              }}>
+                <h2 style={{ color: '#e91e63', fontFamily: 'Great Vibes', marginBottom: '20px' }}>
+                  {selectedPoem.title}
+                </h2>
+
+                <div style={{
+                  whiteSpace: 'pre-line',
+                  fontFamily: 'Kalam',
+                  fontSize: '1.2rem',
+                  lineHeight: '1.8',
+                  color: '#444'
+                }}>
+                  {selectedPoem.content}
+                </div>
+
+                <button onClick={() => setSelectedPoem(null)}
+                  style={{
+                    marginTop: '20px',
+                    padding: '10px 25px',
+                    borderRadius: '30px',
+                    border: 'none',
+                    background: '#ff4d94',
+                    color: 'white',
+                    fontWeight: 'bold',
+                    cursor: 'pointer'
+                  }}>
+                  Back
+                </button>
+              </div>
+            )}
+          </div>
+
+
         ) : (
           <div className="gift-container-page">
             <h1 style={{ color: '#ff1493', fontSize: '2.5rem', fontWeight: '400', marginBottom: '0.2rem', fontFamily: 'Parisienne', textAlign: 'center' }}>Magical Surprises 🎁</h1>
@@ -813,6 +931,15 @@ export default function App() {
                 <div className="gift-icon-box" style={{ background: 'linear-gradient(45deg, #f59e0b, #fbbf24)' }}><PenTool size={32} /></div>
                 <h3>Gift 4</h3><p>Honest Hearts</p><div className="magic-hint" style={{ fontSize: '0.6rem' }}>Tap to Write ✍️</div>
               </div>
+              <div className="gift-tile" onClick={() => setSelectedGift(5)}>
+                <div className="gift-icon-box" style={{ background: 'linear-gradient(45deg,#ec4899,#db2777)' }}>
+                  <Heart size={32} />
+                </div>
+                <h3>Gift 5</h3>
+                <p>Love Poems</p>
+                <div className="magic-hint" style={{ fontSize: '0.6rem' }}>Tap to Read 📜</div>
+              </div>
+
             </div>
           </div>
         )}
