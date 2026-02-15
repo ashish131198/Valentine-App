@@ -418,7 +418,7 @@ export default function App() {
         .btn-yes:active { transform: scale(0.95); }
 
         .btn-no { 
-          position: fixed; padding: 0.6rem 1.5rem; background: rgba(255, 255, 255, 0.95); 
+          position: fixed; padding: 1.3rem 3.5rem; background: rgba(255, 255, 255, 0.95); 
           border: 1px solid #e2e8f0; border-radius: 50px; color: var(--no-color-text); 
           font-weight: 600; z-index: 20; font-size: 0.9rem; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); 
           transition: top 0.15s linear, left 0.15s linear, transform 0.1s;
@@ -571,7 +571,8 @@ export default function App() {
           <div className="proposal-card">
             <Heart size={60} color="#ff4d94" fill="#ff4d94" style={{ marginBottom: '1.5rem', animation: 'heartbeat 1.5s infinite' }} />
             <h1 style={{ marginBottom: '2rem', animation: 'text-float 5s infinite' }}>
-              <span style={{ display: 'block', fontFamily: 'Dancing Script', fontSize: '1.8rem', color: '#ff6b9d', marginBottom: '0.5rem', fontWeight: '700' }}>Someone Special...</span>
+              <span style={{ display: 'block', fontFamily: 'Dancing Script', fontSize: '1.8rem', color: '#ff6b9d', marginBottom: '0.5rem', fontWeight: '700' }}>PRAGATI</span>
+              <span style={{ display: 'block', fontFamily: 'Dancing Script', fontSize: '1.8rem', color: '#ff6b9d', marginBottom: '0.5rem', fontWeight: '700' }}>My SoulMate</span>
               <span style={{ display: 'block', fontFamily: 'Great Vibes', fontSize: '2.5rem', background: 'linear-gradient(135deg, var(--accent-pink), #8e2de2)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>Will you be my Valentine?</span>
             </h1>
             {/* <button */}
