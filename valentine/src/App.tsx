@@ -775,7 +775,7 @@ export default function App() {
         ) : selectedGift === 3 ? (
           <div style={{ width: '100%', minHeight: '100vh', padding: '1rem 0' }}>
             <div style={{ textAlign: 'center', marginBottom: '2rem' }}>
-              <h1 style={{ color: '#ff4d94', fontSize: '2.5rem', fontWeight: '800', fontFamily: 'Great Vibes', marginBottom: '0.5rem' }}>Our Memories 📸</h1>
+              <h1 style={{ color: '#ff4d94', fontSize: '2.5rem', fontWeight: '800', fontFamily: 'Great Vibes', marginBottom: '0.5rem' }}>Your Beautiful Pictures 📸</h1>
               <button onClick={resetSelection} style={{ background: 'white', border: 'none', padding: '0.6rem 1.5rem', borderRadius: '3rem', cursor: 'pointer', color: '#ff4d94', fontWeight: 'bold', fontSize: '0.9rem' }}>Back to Gifts 🎁</button>
             </div>
             <div className="gallery-wrap">
